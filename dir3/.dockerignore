@@ -1,0 +1,5 @@
+target
+ci
+*.md
+Jenkinsfile
+Dockerfile

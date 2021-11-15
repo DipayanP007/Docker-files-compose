@@ -1,0 +1,44 @@
+version: "3.8"
+services:
+  load-balancer:
+    image: nginx-lb
+    container_name: load-balance
+    ports:
+      - "9999:80"
+    init: true
+    labels:
+      Maintained_by: Dipayan Pramanik
+      Purpose: LOad balancer
+    restart: unless-stopped
+    networks:
+      lb-net:
+  
+  spring-app:
+      image: spring-webapp
+      init: true
+      labels:
+        Maintainer: Dipayan Pramanik
+        Purpose: Site proxied to 
+      restart: unless-stopped
+      depends_on:
+          - load-balancer
+      networks:
+        lb-net:
+
+  python-app:
+      image: python-webapp
+      init: true
+      labels:
+        Maintainer: Dipayan Pramanik
+      restart: unless-stopped
+      depends_on:
+        - load-balancer
+      networks:
+        lb-net:
+networks:
+  lb-net:
+    driver: bridge
+    name: lb-net
+    labels:
+      Maintainer: Dipayan Pramanik
+      Purpose: Spring app

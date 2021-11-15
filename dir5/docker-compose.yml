@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  docker-in-docker:
+    image: docker
+    container_name: docker-in-docker
+    command: sh
+    privileged: true
+    volumes:
+      #- "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - target: "/var/run/docker.sock"
+        source: "/var/run/docker.sock"
+        type: bind
+        read_only: yes
+        volume:
+          nocopy: yes
+    stdin_open: yes
+    tty: yes

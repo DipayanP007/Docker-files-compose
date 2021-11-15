@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  image-build:
+    build:
+      context: /home/knoldus/Dipayan-Pramanik/Docker/Docker-practice/dir2/
+      dockerfile: Dockerfile
+      #cache_from: 
+      #- maven:ibmjava-alpine
+      labels:
+        name: Dipayan
+    image: localhost:5000/python-webapp
+
+    #volumes:
+    #my-volume:
+    
